@@ -1,0 +1,64 @@
+HW T 3 Code 
+
+CREATE DATABASE IF NOT EXISTS store_database;
+USE store_database;
+
+
+CREATE TABLE IF NOT EXISTS products (
+    product_id INT PRIMARY KEY,
+    name VARCHAR(255),
+    category_id INT,
+    supplier_id INT,
+    price DECIMAL(10,2),
+    discontinued BOOLEAN
+);
+
+CREATE TABLE IF NOT EXISTS shippers (
+    shipper_id INT PRIMARY KEY,
+    name VARCHAR(255),
+    phone VARCHAR(20)
+);
+
+
+### Завдання 1: Вибір всіх стовпців та конкретних полів
+
+-- Вибір всіх стовпців з таблиці products
+SELECT * FROM products;
+
+-- Вибір name та phone з таблиці shippers
+SELECT name, phone FROM shippers;
+
+### Завдання 2: Агрегатні функції для price
+
+SELECT 
+    AVG(price) as average_price,
+    MAX(price) as max_price,
+    MIN(price) as min_price
+FROM products;
+
+### Завдання 3: Унікальні значення з сортуванням
+
+SELECT DISTINCT category_id, price
+FROM products
+ORDER BY price DESC
+LIMIT 10;
+
+### Завдання 4: Підрахунок товарів у ціновому діапазоні
+
+SELECT COUNT(*) as products_count
+FROM products
+WHERE price BETWEEN 20 AND 100;
+
+### Завдання 5: Групування по постачальнику
+
+SELECT 
+    supplier_id,
+    COUNT(*) as products_count,
+    AVG(price) as average_price
+FROM products
+GROUP BY supplier_id;
+
+
+
+
+
